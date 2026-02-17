@@ -131,16 +131,25 @@
             font-weight: 700;
             color: #2c3e50;
             margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
         
         .word-description {
-            font-size: 0.95em;
+            font-size: 0.85em;
+            color: #555;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+        
+        .word-english {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .word-french {
             color: #666;
-            margin-bottom: 15px;
-            line-height: 1.5;
+            font-style: italic;
+            margin-bottom: 0;
         }
         
         .speaker-button {
@@ -227,82 +236,98 @@
             {
                 emoji: '🧺',
                 main: 'A picnic',
-                description: 'An outdoor meal'
+                english: 'An outdoor meal',
+                french: 'Un pique-nique'
             },
             {
                 emoji: '🍟',
-                main: 'Chips / Crisps',
-                description: 'Thin fried or baked slices'
+                main: 'Chips or Crisps',
+                english: 'Thin fried or baked slices',
+                french: 'Des chips'
             },
             {
                 emoji: '🍎',
                 main: 'Fruits',
-                description: 'Sweet natural food from plants'
+                english: 'Sweet natural food from plants',
+                french: 'Des fruits'
             },
             {
                 emoji: '🥪',
                 main: 'A homemade sandwich',
-                description: 'Two slices of bread with filling'
+                english: 'Two slices of bread with filling',
+                french: 'Un sandwich fait maison'
             },
             {
                 emoji: '🥗',
                 main: 'Veggies and dip',
-                description: 'Fresh vegetables with sauce'
+                english: 'Fresh vegetables with sauce',
+                french: 'Des légumes avec une sauce / trempette'
             },
             {
                 emoji: '🍦',
                 main: 'A yoghurt',
-                description: 'Creamy dairy product'
+                english: 'Creamy dairy product',
+                french: 'Un yaourt'
             },
             {
                 emoji: '🥤',
                 main: 'A water bottle',
-                description: 'Container for water'
+                english: 'Container for water',
+                french: 'Une bouteille d\'eau'
             },
             {
                 emoji: '🥡',
                 main: 'A reusable box',
-                description: 'Container you can use many times'
+                english: 'Container you can use many times',
+                french: 'Une boîte réutilisable'
             },
             {
                 emoji: '🍽',
                 main: 'A paper plate',
-                description: 'Disposable plate made of paper'
+                english: 'Disposable plate made of paper',
+                french: 'Une assiette en papier'
             },
             {
                 emoji: '🍴',
                 main: 'A bamboo fork',
-                description: 'Eco-friendly eating utensil'
+                english: 'Eco-friendly eating utensil',
+                french: 'Une fourchette en bambou'
             },
             {
-                emoji: '���',
+                emoji: '🥄',
                 main: 'A bamboo spoon',
-                description: 'Natural wooden spoon'
+                english: 'Natural wooden spoon',
+                french: 'Une cuillère en bambou'
             },
             {
                 emoji: '🔪',
                 main: 'A bamboo knife',
-                description: 'Sustainable cutting tool'
+                english: 'Sustainable cutting tool',
+                french: 'Un couteau en bambou'
             },
             {
                 emoji: '♻️',
                 main: 'A reusable bag',
-                description: 'Bag you can use repeatedly'
+                english: 'Bag you can use repeatedly',
+                french: 'Un sac réutilisable'
             },
             {
                 emoji: '🌱',
                 main: 'A compost',
-                description: 'Organic waste breakdown'
+                english: 'Organic waste breakdown',
+                french: 'Un compost'
             },
             {
                 emoji: '🗑',
                 main: 'A recycle bin',
-                description: 'Container for recyclable items'
+                english: 'Container for recyclable items',
+                french: 'Une poubelle de recyclage'
             },
             {
                 emoji: '🗑',
-                main: 'Waste / Trash',
-                description: 'Discarded unwanted material'
+                main: 'Waste or Trash',
+                english: 'Discarded unwanted material',
+                french: 'Des déchets / Une poubelle'
             }
         ];
         
@@ -318,7 +343,10 @@
                 <div class="word-content">
                     <div class="emoji">${item.emoji}</div>
                     <div class="word-main">${item.main}</div>
-                    <div class="word-description">${item.description}</div>
+                    <div class="word-description">
+                        <div class="word-english">🇺🇸 ${item.english}</div>
+                        <div class="word-french">🇫🇷 ${item.french}</div>
+                    </div>
                     <button class="speaker-button" title="Click to hear pronunciation">🔊</button>
                 </div>
             `;
@@ -332,12 +360,12 @@
             speedValue.textContent = e.target.value + 'x';
         });
         
-        // Text-to-speech function
+        // Text-to-speech function with American English accent
         function speakWord(text, cardElement) {
             cardElement.classList.add('playing');
             
             const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'en-US';
+            utterance.lang = 'en-US'; // American English
             utterance.rate = parseFloat(speedSlider.value);
             utterance.pitch = 1;
             utterance.volume = 1;
